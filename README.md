@@ -1,2 +1,1 @@
-# UniVid
-UniVid: The Open-Source Unified Video Model
+# UniVid: The Open-Source Unified Video Model
