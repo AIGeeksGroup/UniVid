@@ -1,4 +1,4 @@
-# UniVid: The Open-Source Unified Video Model
+# <img src="https://github.com/AIGeeksGroup/UniVid/blob/website/assets/univid_logo.png" alt="logo" width="25"/> UniVid: The Open-Source Unified Video Model
 This is the official repository for the paper:
 > **UniVid: The Open-Source Unified Video Model**
 >
