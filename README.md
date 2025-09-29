@@ -6,10 +6,12 @@ This is the official repository for the paper:
 >
 > *Equal contribution. <sup>†</sup>Project lead. <sup>‡</sup>Corresponding author.
 >
-> ### 
+> ### [Paper]() | [Website](https://aigeeksgroup.github.io/UniVid) | [Models](https://huggingface.co/AIGeeksGroup/UniVid) | [HF Paper]()
 
-> [!NOTE]
-> 💪 This visualizations brief introduce and show the real world deployment of UniVid.
+
+https://github.com/user-attachments/assets/e81d2e6e-7a69-48a0-91aa-f0a38b5498d2
+
+
 
 
 
