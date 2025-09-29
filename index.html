@@ -339,6 +339,8 @@
         }
     </style>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/univid_logo.png"/>
 </head>
 <body>
     <header>
@@ -511,6 +513,45 @@
     <h2>Text/Image to Video (TI2V)</h2>
     <div class="video-carousel2">
         <div class="video-slides-container2">
+
+            <!-- 第二组视频 -->
+            <div class="video-slide2">
+                <!-- Keep videos side by side -->
+                <div class="slide-videos">
+                    <div class="carousel-video-container2">
+                        <img src="assets/TI2V/2/frame0_2.jpg" style="width: 100%;" class="main-video-container">
+                        <div class="carousel-caption">Image</div>
+                    </div>
+                    <div class="carousel-video-container2">
+                        <video width="100%" height="auto" autoplay loop muted playsinline>
+                            <source src="assets/TI2V/2/h264.mp4" type="video/mp4">
+                        </video>
+                        <div class="carousel-caption" style="margin-top: 15px;">Generated Video</div>
+                    </div>
+                </div>
+                <p class="slide-extra-caption">
+                    A cinematic video of a young woman with natural makeup and long blonde hair, standing on a sunlit street with blurred trees and cars in the background. The camera slowly moves closer as her hair gently flows with the breeze. She softly smiles and blinks, creating a natural and elegant moment. Warm golden hour lighting, realistic style, high detail, 4K. 
+                </p>
+            </div>
+
+            <div class="video-slide2">
+                <!-- Keep videos side by side -->
+                <div class="slide-videos">
+                    <div class="carousel-video-container2">
+                        <img src="assets/TI2V/4/frame0_4.png" style="width: 100%;" class="main-video-container">
+                        <div class="carousel-caption">Image</div>
+                    </div>
+                    <div class="carousel-video-container2">
+                        <video width="100%" height="auto" autoplay loop muted playsinline>
+                            <source src="assets/TI2V/4/h264.mp4" type="video/mp4">
+                        </video>
+                        <div class="carousel-caption" style="margin-top: 15px;">Generated Video</div>
+                    </div>
+                </div>
+                <p class="slide-extra-caption">
+                    A cinematic stormy seashore, dark thunderclouds looming over turbulent waves, crashing surf against jagged rocks, dramatic lighting with gray and blue tones, powerful ocean spray, epic and intense atmosphere.
+            </div>
+
             
             <!-- 第一组视频 -->
             <div class="video-slide2">
@@ -533,28 +574,7 @@
             </div>
 
 
-            
-            <!-- 第二组视频 -->
-            <div class="video-slide2">
-                <!-- Keep videos side by side -->
-                <div class="slide-videos">
-                    <div class="carousel-video-container2">
-                        <img src="assets/TI2V/2/frame0_2.jpg" style="width: 100%;" class="main-video-container">
-                        <div class="carousel-caption">Image</div>
-                    </div>
-                    <div class="carousel-video-container2">
-                        <video width="100%" height="auto" autoplay loop muted playsinline>
-                            <source src="assets/TI2V/2/h264.mp4" type="video/mp4">
-                        </video>
-                        <div class="carousel-caption" style="margin-top: 15px;">Generated Video</div>
-                    </div>
-                </div>
-                <p class="slide-extra-caption">
-                    A cinematic video of a young woman with natural makeup and long blonde hair, standing on a sunlit street with blurred trees and cars in the background. The camera slowly moves closer as her hair gently flows with the breeze. She softly smiles and blinks, creating a natural and elegant moment. Warm golden hour lighting, realistic style, high detail, 4K. 
-                </p>
-            </div>
-
-
+        
             <div class="video-slide2">
                 <!-- Keep videos side by side -->
                 <div class="slide-videos">
@@ -574,26 +594,6 @@
                 </p>
             </div>
 
-
-            <div class="video-slide2">
-                <!-- Keep videos side by side -->
-                <div class="slide-videos">
-                    <div class="carousel-video-container2">
-                        <img src="assets/TI2V/4/frame0_4.png" style="width: 100%;" class="main-video-container">
-                        <div class="carousel-caption">Image</div>
-                    </div>
-                    <div class="carousel-video-container2">
-                        <video width="100%" height="auto" autoplay loop muted playsinline>
-                            <source src="assets/TI2V/4/h264.mp4" type="video/mp4">
-                        </video>
-                        <div class="carousel-caption" style="margin-top: 15px;">Generated Video</div>
-                    </div>
-                </div>
-                <p class="slide-extra-caption">
-                    A cinematic stormy seashore, dark thunderclouds looming over turbulent waves, crashing surf against jagged rocks, dramatic lighting with gray and blue tones, powerful ocean spray, epic and intense atmosphere.
-            </div>
-
-
         </div>
 
          <!-- 轮播指示器 -->
@@ -607,7 +607,7 @@
     </div>
 
     <h2>Video Understanding</h2>
-    <div class="video-carousel">
+    <div id="video-understanding-carousel" class="video-carousel">
         <div class="video-slides-container">
             <!-- 第一组视频 -->
             <div class="video-slide">
@@ -710,11 +710,14 @@
       let currentIndex = 0;
       let intervalId;
     
-      function startAutoSlide() {
-        intervalId = setInterval(() => {
-          showSlide((currentIndex + 1) % totalSlides);
-        }, 5000);
-      }
+      // ✅ different speed if it's the "Video Understanding" carousel
+        const intervalTime = carousel.id === "video-understanding-carousel" ? 120000 : 5000;
+
+        function startAutoSlide() {
+            intervalId = setInterval(() => {
+            showSlide((currentIndex + 1) % totalSlides);
+            }, intervalTime);
+        }
     
       function showSlide(index, animate = true) {
         const translateValue = -(index * (100 / totalSlides));
