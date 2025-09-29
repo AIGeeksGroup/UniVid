@@ -1,0 +1,9 @@
+Description: The race car speeds down the track, tires screeching
+as it takes a tight corner.
+Frames: 93
+FPS: 24
+Resolution: 1280x704
+Duration: 3.88 seconds
+Codec: h264
+Bitrate: 10M
+Generated: 2025-09-25T13:49:41.741505

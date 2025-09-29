@@ -1,0 +1,8 @@
+Description: A hawk soars above the mountains, wings spread wide against the sunset.
+Frames: 93
+FPS: 24
+Resolution: 1280x704
+Duration: 3.88 seconds
+Codec: h264
+Bitrate: 10M
+Generated: 2025-09-25T06:19:43.566243

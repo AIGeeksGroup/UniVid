@@ -1,0 +1,8 @@
+Description: Two anthropomorphic cats in comfy boxing gear and bright gloves fight intensely on a spotlighted stage.
+Frames: 93
+FPS: 24
+Resolution: 1280x704
+Duration: 3.88 seconds
+Codec: h264
+Bitrate: 10M
+Generated: 2025-09-25T02:16:12.256470

@@ -1,0 +1,8 @@
+Description: A high-speed train rushes past the station, its motion blurring in the background.
+Frames: 93
+FPS: 24
+Resolution: 1280x704
+Duration: 3.88 seconds
+Codec: h264
+Bitrate: 10M
+Generated: 2025-09-25T13:59:14.190743

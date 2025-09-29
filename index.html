@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniVid: The Open-Source Unified Video Model</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            font-size: 16px;
+            font-weight: 400;
+            text-rendering: optimizeLegibility;
+        }
+
+        .footer {
+            background-color: #ffffff; /* deep navy */
+            padding: 1.5rem 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+          }
+          
+        .footer p {
+        color: #666;
+        font-size: 0.95rem;
+        margin: 0;
+        }
+        
+        .footer strong {
+        color: #000000; /* cyan accent */
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-top: 50px;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        
+        .authors {
+            margin-bottom: 25px;
+            color: #666;
+        }
+
+        .author {
+          margin: 0 5px;
+          color: #444444;
+          transition: color 0.3s;
+          text-decoration: none;
+        }
+
+        .author:hover {
+          color: #aaa;
+        }
+        
+        .affiliations {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .button {
+            background-color: #333;
+            transition: background-color 0.3s;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .button:hover {
+          background-color: #111;
+        }
+        
+        .icon {
+            margin-right: 5px;
+        }
+        
+        .image-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            justify-content: space-between;
+        }
+        
+        .image-container {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .image-placeholder {
+            background-color: #f0f0f0;
+            width: 100%;
+            padding-top: 75%;
+            position: relative;
+            margin-bottom: 5px;
+        }
+        
+        .caption {
+            font-size: 14px;
+            text-align: center;
+            color: #666;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: normal;
+        }
+        
+        .abstract {
+            margin-bottom: 40px;
+            text-align: justify;
+            line-height: 1.6;
+        }
+        
+        .video-carousel {
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .video-carousel2 {
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .video-slides-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 500%;
+        }
+
+        .video-slides-container2 {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 400%;
+        }
+
+        .video-slide {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+            width: 20%;
+            flex-shrink: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* keep your 400%/25% layout as-is */
+        .video-slide2{
+        display: flex;
+        flex-wrap: wrap;        /* allow next line */
+        align-items: flex-start;
+        width: 25%;
+        flex-shrink: 0;
+        padding: 0; margin: 0;
+        }
+
+        /* videos stay horizontal */
+        .video-slide2 .slide-videos{
+        display: flex;
+        gap: 5px;
+        width: 100%;           /* row 1 */
+        }
+
+        /* caption goes below on its own line */
+        .video-slide2 .slide-extra-caption{
+        flex: 0 0 100%;        /* row 2 */
+        margin-top: 10px;
+        font-size: 14px;
+        text-align: center;
+        color: #666;
+        }
+
+
+        .carousel-video-container {
+            flex: 1;
+            text-align: center;
+            background: none;
+            height: auto;
+            position: relative;
+        }
+
+        .carousel-video-container2 {
+            flex: 1;
+            text-align: center;
+            background: none;
+            height: auto;
+            position: relative;
+        }
+
+        .carousel-video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            vertical-align: middle;
+        }
+
+        .carousel-video-container2 video {
+            width: 100%;
+            height: auto;
+            display: block;
+            vertical-align: middle;
+        }
+
+        .main-video-container {
+            width: 100%;
+            position: relative;
+        }
+
+        .main-video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-placeholder {
+            background-color: #f0f0f0;
+            width: 100%;
+            padding-top: 56.25%;
+            position: relative;
+        }
+
+        .carousel-caption {
+            font-size: 14px;
+            text-align: center;
+            color: #666;
+            margin: 5px 0 0 0;
+            padding: 0;
+            background: none;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        .carousel-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-indicator:hover {
+            background-color: #999;
+            transform: scale(1.1);
+        }
+
+        .carousel-indicator.active {
+            background-color: #333;
+            transform: scale(1.2);
+        }
+        
+        .section {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+            position: relative;
+            min-height: 100px;
+        }
+        
+        .section-content {
+            flex: 1;
+            padding-right: 20px;
+        }
+        
+        .section-image {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .section-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .section-image .caption {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .video-slide, .image-row, .section {
+                flex-direction: column;
+            }
+            
+            .example-image {
+                width: 100%;
+                height: 250px;
+            }
+            
+            .section-content, .section-image {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1><strong>UniVid</strong>: The Open-Source Unified Video Model</h1>
+        <div class="authors">
+          <a class="author" target="_blank" rel="noopener noreferrer" href="#">Jiabin Luo<sup>1*</sup></a>
+          <a class="author" target="_blank" rel="noopener noreferrer" href="#">Junhui Lin<sup>2*</sup></a>
+          <a class="author" target="_blank" rel="noopener noreferrer" href="https://steve-zeyu-zhang.github.io/">Zeyu Zhang<sup>1*†</sup></a>
+          <a class="author" target="_blank" rel="noopener noreferrer" href="#">Biao Wu<sup>3*</sup></a>
+          <a class="author" target="_blank" rel="noopener noreferrer" href="#">Meng Fang<sup>3</sup></a>
+          <a class="author" target="_blank" rel="noopener noreferrer" href="#">Ling Chen<sup>3</sup></a>
+          <a class="author" target="_blank" rel="noopener noreferrer" href="https://ha0tang.github.io/">Hao Tang<sup>1‡</sup></a><br>
+          <p class="affiliations"><sup>1</sup>Peking University <sup>2</sup>AI Geeks <sup>3</sup>Australian Artificial Intelligence Institute</p>
+          <p class="affiliations"><sup>*</sup>Equal contribution. <sup>†</sup>Project lead. <sup>‡</sup>Corresponding author.</p>
+        </div>
+        <div class="button-group">
+            <a class="button" target="_blank" href="#">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                Paper
+            </a>
+            <a class="button" target="_blank" href="https://github.com/AIGeeksGroup/UniVid">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                Code
+            </a>
+        </div>
+    </header>
+
+    <div class="abstract">
+        <p>
+        <b>TL;DR:</b> We present UniVid, an open-source unified video model for both understanding and generation tasks. Our model requires only a small amount of high-quality data for fine-tuning, achieveing competitive results across various tasks.
+        </p>
+    </div>
+    
+    <div id="carousel1" class="video-carousel">
+        <div class="video-slides-container">
+            <!-- 第一组视频 -->
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/videos/1.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">Mouse with large teeth aggressively eating cheese.</div>
+                </div>
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/videos/2.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">A white cat in sunglasses relaxes on a surfboard at the beach under a sunny sky.</div>
+                </div>
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/videos/3.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">Ten fluffy kittens eat breakfast together in warm sunlight.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <h2>Abstract</h2>
+    <div class="abstract">
+          <p>
+            Unified video modeling that combines generation and understanding capabilities is increasingly important but faces two key challenges: maintaining semantic faithfulness during flow-based generation due to text-visual token imbalance and the limitations of uniform cross-modal attention across the flow trajectory, and efficiently extending image-centric MLLMs to video without costly retraining.
+            We present <strong>UniVid</strong>, a unified architecture that couples an MLLM with a diffusion decoder through a lightweight adapter, enabling both video understanding and generation. We introduce <em>Temperature Modality Alignment</em> to improve prompt adherence and <em>Pyramid Reflection</em> for efficient temporal reasoning via dynamic keyframe selection.
+            Extensive experiments on standard benchmarks demonstrate state-of-the-art performance, achieving a <strong>2.2%</strong> improvement on VBench-Long total score compared to EasyAnimateV5.1, and <strong>1.0%</strong> and <strong>3.3%</strong> accuracy gains on MSVD-QA and ActivityNet-QA, respectively, compared with the best prior 7B baselines.
+        </p>
+    </div>
+
+
+    <h2>Text to Video (T2V)</h2>
+    <div class="video-carousel">
+        <div class="video-slides-container">
+            <!-- 第一组视频 -->
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/7/rescaled_1.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">Dog walking on the beach.</div>
+                </div>
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/9/rescaled_2.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">A garden with greek plants (levander, dendrolivano, stepa, olive).</div>
+                </div>
+                <br>
+            </div>
+
+            <!-- 第二组视频 -->
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/8/rescaled_4.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">A narrow suspension bridge stretches across a vast canyon in the mountains. Mist surrounds the area, pierced by soft rays of the morning sun. Below the bridge, a wild river rushes through the chasm, and on both sides of the cliffs, massive waterfalls cascade down with thunderous force. The roar of water echoes in the background.</div>
+                </div>
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/10/rescaled_3.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">A dark, cinematic music video in a gothic style. A storm brews over the night sea, with waves crashing against sharp cliffs and lightning flashing across the sky. On the wet sand, a lone figure dressed in black walks under the cold blue glow of the moon, symbolizing both inner struggle and a faint hope. The visuals should feel moody and powerful, with slow-motion shots of water surging, storm clouds racing, and light breaking through the darkness.</div>
+                </div>
+            </div>
+
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/5/Golden_sunrise_over_snowy_moun.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">Golden sunrise over snowy mountains, warm golden light illuminating snow-covered peaks, dramatic sky with orange and blue gradient, soft mist drifting across the valley, epic and tranquil cinematic landscape.</div>
+                </div>
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/6/h264.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">The race car speeds down the track, tires screeching.</div>
+                </div>
+            </div>
+            
+
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/1/A_dolphin_leaps_out_of_the_oce_.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">A dolphin leaps out of the ocean, splashing water as it dives back in.</div>
+                </div>
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/2/Two_anthropomorphic_cats.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">Two anthropomorphic cats in comfy boxing gear and bright gloves fight intensely on a spotlighted stage.</div>
+                </div>
+            </div>
+
+            
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/3/h264.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">A futuristic drone weaves quickly between skyscrapers, lights glowing in the night sky.</div>
+                </div>
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline>
+                        <source src="/home/zhang/Downloads/UniVid/assets/T2V/4/h264.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption">A high-speed train rushes past the station, its motion blurring in the background.</div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- 轮播指示器 -->
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active" data-index="0"></div>
+            <div class="carousel-indicator" data-index="1"></div>
+            <div class="carousel-indicator" data-index="2"></div>
+            <div class="carousel-indicator" data-index="3"></div>
+            <div class="carousel-indicator" data-index="4"></div>
+        </div>
+    </div>
+
+
+    <h2>Text/Image to Video (TI2V)</h2>
+    <div class="video-carousel2">
+        <div class="video-slides-container2">
+            
+            <!-- 第一组视频 -->
+            <div class="video-slide2">
+                <!-- Keep videos side by side -->
+                <div class="slide-videos">
+                    <div class="carousel-video-container2">
+                        <img src="/home/zhang/Downloads/UniVid/assets/TI2V/1/frame0_1.jpg" style="width: 100%;" class="main-video-container">
+                        <div class="carousel-caption">Image</div>
+                    </div>
+                    <div class="carousel-video-container2">
+                        <video width="100%" height="auto" autoplay loop muted playsinline>
+                            <source src="/home/zhang/Downloads/UniVid/assets/TI2V/1/h264.mp4" type="video/mp4">
+                        </video>
+                        <div class="carousel-caption" style="margin-top: 15px;">Generated Video</div>
+                    </div>
+                </div>
+                <p class="slide-extra-caption">
+                    A hawk soars above the mountains, wings spread wide against the sunset.
+                </p>
+            </div>
+
+
+            
+            <!-- 第二组视频 -->
+            <div class="video-slide2">
+                <!-- Keep videos side by side -->
+                <div class="slide-videos">
+                    <div class="carousel-video-container2">
+                        <img src="/home/zhang/Downloads/UniVid/assets/TI2V/2/frame0_2.jpg" style="width: 100%;" class="main-video-container">
+                        <div class="carousel-caption">Image</div>
+                    </div>
+                    <div class="carousel-video-container2">
+                        <video width="100%" height="auto" autoplay loop muted playsinline>
+                            <source src="/home/zhang/Downloads/UniVid/assets/TI2V/2/h264.mp4" type="video/mp4">
+                        </video>
+                        <div class="carousel-caption" style="margin-top: 15px;">Generated Video</div>
+                    </div>
+                </div>
+                <p class="slide-extra-caption">
+                    A cinematic video of a young woman with natural makeup and long blonde hair, standing on a sunlit street with blurred trees and cars in the background. The camera slowly moves closer as her hair gently flows with the breeze. She softly smiles and blinks, creating a natural and elegant moment. Warm golden hour lighting, realistic style, high detail, 4K. 
+                </p>
+            </div>
+
+
+            <div class="video-slide2">
+                <!-- Keep videos side by side -->
+                <div class="slide-videos">
+                    <div class="carousel-video-container2">
+                        <img src="/home/zhang/Downloads/UniVid/assets/TI2V/3/frame0_3.jpg" style="width: 100%;" class="main-video-container">
+                        <div class="carousel-caption">Image</div>
+                    </div>
+                    <div class="carousel-video-container2">
+                        <video width="100%" height="auto" autoplay loop muted playsinline>
+                            <source src="/home/zhang/Downloads/UniVid/assets/TI2V/3/h264.mp4" type="video/mp4">
+                        </video>
+                        <div class="carousel-caption" style="margin-top: 15px;">Generated Video</div>
+                    </div>
+                </div>
+                <p class="slide-extra-caption">
+                    Windswept coastal cliffs in rugged landscape, towering rocky cliffs with windswept grass, dramatic ocean waves crashing below, moody gray-blue sky, raw and powerful cinematic scenery.
+                </p>
+            </div>
+
+
+            <div class="video-slide2">
+                <!-- Keep videos side by side -->
+                <div class="slide-videos">
+                    <div class="carousel-video-container2">
+                        <img src="/home/zhang/Downloads/UniVid/assets/TI2V/4/frame0_4.png" style="width: 100%;" class="main-video-container">
+                        <div class="carousel-caption">Image</div>
+                    </div>
+                    <div class="carousel-video-container2">
+                        <video width="100%" height="auto" autoplay loop muted playsinline>
+                            <source src="/home/zhang/Downloads/UniVid/assets/TI2V/4/h264.mp4" type="video/mp4">
+                        </video>
+                        <div class="carousel-caption" style="margin-top: 15px;">Generated Video</div>
+                    </div>
+                </div>
+                <p class="slide-extra-caption">
+                    A cinematic stormy seashore, dark thunderclouds looming over turbulent waves, crashing surf against jagged rocks, dramatic lighting with gray and blue tones, powerful ocean spray, epic and intense atmosphere.
+            </div>
+
+
+        </div>
+
+         <!-- 轮播指示器 -->
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active" data-index="0"></div>
+            <div class="carousel-indicator" data-index="1"></div>
+            <div class="carousel-indicator" data-index="2"></div>
+            <div class="carousel-indicator" data-index="3"></div>
+        </div>
+
+    </div>
+
+    <h2>Video Understanding</h2>
+    <div class="video-carousel">
+        <div class="video-slides-container">
+            <!-- 第一组视频 -->
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline controls>
+                        <source src="/home/zhang/Downloads/UniVid/assets/understanding/F1.mp4" type="video/mp4">
+                    </video>
+                    <!-- <div class="carousel-caption">Dog walking on the beach.</div> -->
+                </div>
+                <br>
+            </div>
+
+            <!-- 第二组视频 -->
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline controls>
+                        <source src="/home/zhang/Downloads/UniVid/assets/understanding/F2.mp4" type="video/mp4">
+                    </video>
+                    <!-- <div class="carousel-caption">A narrow suspension bridge stretches across a vast canyon in the mountains. Mist surrounds the area, pierced by soft rays of the morning sun. Below the bridge, a wild river rushes through the chasm, and on both sides of the cliffs, massive waterfalls cascade down with thunderous force. The roar of water echoes in the background.</div> -->
+                </div>
+            </div>
+
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline controls>
+                        <source src="/home/zhang/Downloads/UniVid/assets/understanding/F3.mp4" type="video/mp4">
+                    </video>
+                    <!-- <div class="carousel-caption">Golden sunrise over snowy mountains, warm golden light illuminating snow-covered peaks, dramatic sky with orange and blue gradient, soft mist drifting across the valley, epic and tranquil cinematic landscape.</div> -->
+                </div>
+            </div>
+            
+
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline controls>
+                        <source src="/home/zhang/Downloads/UniVid/assets/understanding/F4.mp4" type="video/mp4">
+                    </video>
+                    <!-- <div class="carousel-caption">A dolphin leaps out of the ocean, splashing water as it dives back in.</div> -->
+                </div>
+            </div>
+
+            
+            <div class="video-slide">
+                <div class="carousel-video-container">
+                    <video width="100%" height="auto" autoplay loop muted playsinline controls>
+                        <source src="/home/zhang/Downloads/UniVid/assets/understanding/F5.mp4" type="video/mp4">
+                    </video>
+                    <!-- <div class="carousel-caption">A futuristic drone weaves quickly between skyscrapers, lights glowing in the night sky.</div> -->
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- 轮播指示器 -->
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active" data-index="0"></div>
+            <div class="carousel-indicator" data-index="1"></div>
+            <div class="carousel-indicator" data-index="2"></div>
+            <div class="carousel-indicator" data-index="3"></div>
+            <div class="carousel-indicator" data-index="4"></div>
+        </div>
+    </div>
+
+    
+    <h2>Method</h2>
+    <div class="abstract">
+        <p>
+            Overall architecture of our proposed UniVid for unified video understanding and generation. UniVid couples an autoregressive-based MLLM with a DiT-based diffusion decoder. The MLLM's outputs are linked through a lightweight adapter to interface with the Wan2.2-TI2V-5B backbone, forming the generation branch, while simultaneously passing through the Pyramid Reflection module to connect with the LLM, thereby establishing the understanding branch.
+
+        <div style="text-align: center; margin-bottom: 25px;">
+            <img src="assets/Overall_architecture_page-0001.jpg" style="width: 90%;" class="main-video-container">
+            <!-- <div class="caption">
+                We efficiently repurpose I2V for video inpainting with our symmetric mask condition (introduced below) and LoRA finetuning.
+            </div> -->
+        </div>
+ 
+    <hr style="margin-top: 3rem;">
+        <footer class="footer">
+            <div class="container">
+                <div class="has-text-centered">
+                   
+                    <p>
+                        <b>UniVid:</b> The Open-Source Unified Video Model
+                    </p>
+                </div>
+            </div>
+        </footer>
+    
+    
+    
+    
+    <script>
+        function initCarousel(carousel) {
+      const slidesContainer = carousel.querySelector(
+        '.video-slides-container, .video-slides-container2'
+      );
+      const slides = carousel.querySelectorAll('.video-slide, .video-slide2');
+      const indicators = carousel.querySelectorAll('.carousel-indicator');
+      const totalSlides = slides.length;
+      let currentIndex = 0;
+      let intervalId;
+    
+      function startAutoSlide() {
+        intervalId = setInterval(() => {
+          showSlide((currentIndex + 1) % totalSlides);
+        }, 5000);
+      }
+    
+      function showSlide(index, animate = true) {
+        const translateValue = -(index * (100 / totalSlides));
+        slidesContainer.style.transition = animate ? 'transform 0.5s ease' : 'none';
+        slidesContainer.style.transform = `translateX(${translateValue}%)`;
+        indicators.forEach((ind, i) => ind.classList.toggle('active', i === index));
+        currentIndex = index;
+      }
+    
+      // init
+      showSlide(0, false);
+      startAutoSlide();
+    
+      indicators.forEach((ind, i) => {
+        ind.addEventListener('click', () => showSlide(i));
+      });
+    }
+    
+    // ✅ initialize both carousels
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.video-carousel, .video-carousel2').forEach(initCarousel);
+    });
+        </script>
+        <!-- Use same tab for click on links-->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("a[target='_blank']").forEach(link => {
+                link.removeAttribute("target");
+            });
+            });
+        </script>
+        
+</body>
+</html>

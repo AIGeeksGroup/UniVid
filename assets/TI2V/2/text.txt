@@ -1,0 +1,8 @@
+Description: A cinematic video of a young woman with natural makeup and long blonde hair, standing on a sunlit street with blurred trees and cars in the background. The camera slowly moves closer as her hair gently flows with the breeze. She softly smiles and blinks, creating a natural and elegant moment. Warm golden hour lighting, realistic style, high detail, 4K. 
+Frames: 93
+FPS: 24
+Resolution: 1248x704
+Duration: 3.88 seconds
+Codec: h264
+Bitrate: 10M
+Generated: 2025-09-25T14:23:39.684131
