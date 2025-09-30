@@ -199,7 +199,7 @@ class CrossAttentionConfig:
     use_one_cycle_lr: bool = True  
 
     use_dynamic_text_weight: bool = True  
-    text_weight_max: float = 1.5  
+    text_weight_max: float = 1.3  
     text_weight_min: float = 1.0  
     text_weight_schedule: str = "cosine"  
     text_weight_transition_ratio: float = 0.4  
@@ -3703,7 +3703,7 @@ def main():
         print("      video, path = pipeline.generate_video_with_bagel_context(prompt)")
         print()
         print("🎯 Key Technical Claims ():")
-        print("   ✅ : Dynamic text weight scheduling (1.5→1.0)")
+        print("   ✅ : Dynamic text weight scheduling (1.3→1.0)")
         print("   ✅ : Timestep-aware cross attention modulation")
         print("   ✅ : Solves text weakening in multimodal fusion")
         print("   ✅ Unified multimodal foundation → video generation head")
