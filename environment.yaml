@@ -1,4 +1,4 @@
-name: bagel
+name: univid
 channels:
   - defaults
   - conda-forge
