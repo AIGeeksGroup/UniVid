@@ -6,7 +6,7 @@ This is the official repository for the paper:
 >
 > *Equal contribution. <sup>†</sup>Project lead. <sup>‡</sup>Corresponding author.
 >
-> ### [Paper]() | [Website](https://aigeeksgroup.github.io/UniVid) | [Models](https://huggingface.co/AIGeeksGroup/UniVid) | [HF Paper]()
+> ### [Paper](https://arxiv.org/abs/2509.24200) | [Website](https://aigeeksgroup.github.io/UniVid) | [Models](https://huggingface.co/AIGeeksGroup/UniVid) | [HF Paper]()
 
 
 https://github.com/user-attachments/assets/e81d2e6e-7a69-48a0-91aa-f0a38b5498d2
