@@ -51,8 +51,8 @@ except ImportError:
         print("❌ PEFT installation failed")
 
 CURRENT_DIR = Path(__file__).parent
-BAGEL_PATH = CURRENT_DIR / 'BAGEL'
-WAN_PATH = CURRENT_DIR / 'Wan22'
+BAGEL_PATH = CURRENT_DIR / 'models' / 'BAGEL'
+WAN_PATH = CURRENT_DIR / 'models' / 'Wan22'
 
 for path in [BAGEL_PATH, WAN_PATH]:
     if str(path) not in sys.path:
@@ -278,7 +278,7 @@ class CrossAttentionConfig:
         print(f"   🎯 Semantic Alignment: {self.use_semantic_alignment}")
 
         if self.use_dynamic_text_weight:
-            print(f"   🎯 V7 Dynamic Text Weight: {self.text_weight_max} → {self.text_weight_min}")
+            print(f"   🎯  Dynamic Text Weight: {self.text_weight_max} → {self.text_weight_min}")
             print(f"   📈 Schedule: {self.text_weight_schedule} (transition: {self.text_weight_transition_ratio*100}%)")
 
     def _validate_paths(self):
@@ -1650,7 +1650,7 @@ class Wan22ContextWrapper:
 
         self._apply_cross_attention_hooks()
 
-        print("🎬 Wan2.2 Context Wrapper V7 ready - Dynamic Text Weight Scheduling enabled!")
+        print("🎬 Wan2.2 Context Wrapper  ready - Dynamic Text Weight Scheduling enabled!")
 
     def _get_dit_model(self):
         if hasattr(self.original_pipeline, 'model'):
@@ -1846,7 +1846,7 @@ class Wan22ContextWrapper:
     def generate(self, **kwargs):
         try:
             if self.config.use_dynamic_text_weight:
-                self.logger.info("🎯 V7: Dynamic text weight scheduling activated")
+                self.logger.info("🎯 : Dynamic text weight scheduling activated")
                 self.logger.info(f"   📊 Weight range: {self.config.text_weight_max} → {self.config.text_weight_min}")
                 self.logger.info(f"   ⏱️ Transition: {self.config.text_weight_transition_ratio * 100}% of {self.config.total_sampling_steps} steps")
 
@@ -1874,7 +1874,7 @@ class Wan22ContextWrapper:
             if self.config.use_dynamic_text_weight:
 
                 self.dit_model.forward = original_dit_forward
-                self.logger.info(f"✅ V7: Dynamic text weight scheduling completed ({self.sampling_step_counter} steps)")
+                self.logger.info(f"✅ : Dynamic text weight scheduling completed ({self.sampling_step_counter} steps)")
 
                 delattr(self, 'sampling_step_counter')
 
@@ -2612,7 +2612,7 @@ class CrossAttentionFusionPipeline(nn.Module):
             self.logger.info(f"🎯 Generating with BAGEL cross attention...")
 
             if self.config.use_dynamic_text_weight:
-                self.logger.info(f"   📈 V7: Dynamic text weight enabled")
+                self.logger.info(f"   📈 : Dynamic text weight enabled")
                 self.logger.info(f"   📊 Weight range: {self.config.text_weight_max} → {self.config.text_weight_min}")
                 self.logger.info(f"   ⏱️ Schedule: {self.config.text_weight_schedule}")
 
@@ -3644,11 +3644,11 @@ def create_cross_attention_pipeline(
 
 def main():
 
-    print("🎯 CROSS ATTENTION FUSION: BAGEL + Wan2.2 - V7")
-    print("🚀 V7 FEATURE: Dynamic Text Weight Scheduling")
+    print("🎯 CROSS ATTENTION FUSION: BAGEL + Wan2.2 - ")
+    print("🚀  FEATURE: Dynamic Text Weight Scheduling")
     print("=" * 80)
     print()
-    print("🔧 V7 NEW Features:")
+    print("🔧  NEW Features:")
     print("   ✨ Dynamic text weight scheduling based on timestep")
     print("   📈 Early phase: Stronger text guidance (weight ↑)")
     print("   📉 Late phase: Balanced text/image fusion (weight →1.0)")
@@ -3668,7 +3668,7 @@ def main():
     print("🎯 Technical Architecture:")
     print("   🥯 BAGEL (7B): Unified multimodal foundation model")
     print("   🎬 Wan2.2 (5B): Video generation head with cross attention")
-    print("   🔄 V7: Timestep-aware context weighting in cross attention")
+    print("   🔄 : Timestep-aware context weighting in cross attention")
     print("   🎯 Semantic alignment: BAGEL tokens → T5 feature space")
     print("   🚀 LoRA efficient training: Smart target module selection")
     print()
@@ -3702,10 +3702,10 @@ def main():
         print("      pipeline = create_cross_attention_pipeline()")
         print("      video, path = pipeline.generate_video_with_bagel_context(prompt)")
         print()
-        print("🎯 Key Technical Claims (V7):")
-        print("   ✅ V7: Dynamic text weight scheduling (1.5→1.0)")
-        print("   ✅ V7: Timestep-aware cross attention modulation")
-        print("   ✅ V7: Solves text weakening in multimodal fusion")
+        print("🎯 Key Technical Claims ():")
+        print("   ✅ : Dynamic text weight scheduling (1.5→1.0)")
+        print("   ✅ : Timestep-aware cross attention modulation")
+        print("   ✅ : Solves text weakening in multimodal fusion")
         print("   ✅ Unified multimodal foundation → video generation head")
         print("   ✅ Direct context injection in latent space")
         print("   ✅ Cross-modal semantic alignment via cosine similarity")
