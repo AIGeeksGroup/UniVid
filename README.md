@@ -27,7 +27,7 @@ If you find our code or paper helpful, please consider starring ⭐ us and citin
 - ⬜️ Upload the code.
 
 ## 🏃 Intro UniVid
-![image](./assets/overall_architecture.png)
+![image](./assets/overall_architecture.jpg)
 ## 🔧Run Your UniVid
 
 ### 1. Install & Requirements
