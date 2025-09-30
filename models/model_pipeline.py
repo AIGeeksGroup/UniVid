@@ -23,7 +23,7 @@ import torch.nn.functional as F
 from einops import rearrange
 from torch.utils.data import Dataset, DataLoader
 from torch.optim import AdamW
-from torch.optim.lr_scheduler import CosineAnnealingLR, OneCycleLR  
+from torch.optim.lr_scheduler import CosineAnnealingLR, OneCycleLR   
 
 torch.backends.cuda.matmul.allow_tf32 = False
 torch.backends.cudnn.allow_tf32 = False
