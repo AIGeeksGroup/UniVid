@@ -19,6 +19,14 @@ https://github.com/user-attachments/assets/e81d2e6e-7a69-48a0-91aa-f0a38b5498d2
 
 If you find our code or paper helpful, please consider starring ⭐ us and citing:
 
+```
+@article{luo2025unividopensourceunifiedvideo,
+      title={UniVid: The Open-Source Unified Video Model}, 
+      author={Jiabin Luo and Junhui Lin and Zeyu Zhang and Biao Wu and Meng Fang and Ling Chen and Hao Tang},
+      journal={https://arxiv.org/abs/2509.24200}, 
+      year={2025}
+}
+```
 
 
 ## TODO List
