@@ -17,7 +17,7 @@ if CURRENT_DIR.name != 'UniVid':
     if univid_dir.exists():
         sys.path.insert(0, str(univid_dir))
 
-from bagel_wan_video_head_post_training_v7 import (
+from model_pipeline import (
     CrossAttentionConfig,
     CrossAttentionFusionPipeline
 )
@@ -137,10 +137,10 @@ class HighQualityVideoGenerator:
             self.logger.warning("⚠️ Prompt extend requested but not available")
     
     def setup_pipeline(self):
-        self.logger.info("🚀 Initializing High-Quality Video Generation Pipeline V7...")
+        self.logger.info("🚀 Initializing High-Quality Video Generation Pipeline...")
         if self.config.use_lora:
             self.logger.info(f"🎯 LoRA Enabled: Loading from {self.config.lora_checkpoint_path}")
-        self.logger.info("✨ V7 Feature: Dynamic Text Weight Scheduling Enabled")
+        self.logger.info("✨ Feature: Dynamic Text Weight Scheduling Enabled")
 
         ca_config = CrossAttentionConfig(
 
@@ -270,7 +270,7 @@ class HighQualityVideoGenerator:
         output_name: Optional[str] = None
     ) -> Tuple[Optional[torch.Tensor], Optional[str]]:
 
-        self.logger.info("🎬 Generating Text-to-Video (V7)...")
+        self.logger.info("🎬 Generating Text-to-Video ...")
         self.logger.info(f"📝 Original Prompt: {prompt}")
 
         # Prompt Extend
@@ -290,7 +290,7 @@ class HighQualityVideoGenerator:
                 self.logger.warning(f"⚠️ Prompt extension failed: {e}, using original prompt")
 
         if self.config.use_dynamic_text_weight:
-            self.logger.info(f"📈 V7: Dynamic text weight enabled ({self.config.text_weight_max}→{self.config.text_weight_min})")
+            self.logger.info(f"📈 : Dynamic text weight enabled ({self.config.text_weight_max}→{self.config.text_weight_min})")
 
         if output_name is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -341,11 +341,11 @@ class HighQualityVideoGenerator:
         output_name: Optional[str] = None
     ) -> Tuple[Optional[torch.Tensor], Optional[str]]:
         
-        self.logger.info("🎬 Generating Image-to-Video (V7)...")
+        self.logger.info("🎬 Generating Image-to-Video ()...")
         self.logger.info(f"🖼️ Image: {image_path}")
         self.logger.info(f"📝 Prompt: {prompt}")
         if self.config.use_dynamic_text_weight:
-            self.logger.info(f"📈 V7: Dynamic text weight enabled ({self.config.text_weight_max}→{self.config.text_weight_min})")
+            self.logger.info(f"📈 : Dynamic text weight enabled ({self.config.text_weight_max}→{self.config.text_weight_min})")
         
         # 加载图像
         if not os.path.exists(image_path):
@@ -524,12 +524,12 @@ class HighQualityVideoGenerator:
 
 def main():
     
-    parser = argparse.ArgumentParser(description="High-Quality Video Generation V7 with Dynamic Text Weight")
+    parser = argparse.ArgumentParser(description="High-Quality Video Generation  with Dynamic Text Weight")
     parser.add_argument("--mode", type=str, choices=["t2v", "i2v", "both"], default="both",
                        help="Generation mode: t2v (text-to-video), i2v (image-to-video), or both")
     parser.add_argument("--image", type=str, default="/fs/scratch/PFIN0007/ICLR_2025/UniVid/Wan22/examples/i2v_input.JPG",
                        help="Input image path for i2v mode")
-    parser.add_argument("--output_dir", type=str, default="./outputs_v7_high_quality",
+    parser.add_argument("--output_dir", type=str, default="./outputs__high_quality",
                        help="Output directory for generated videos")
     parser.add_argument("--seed", type=int, default=42,
                        help="Random seed for reproducibility")
@@ -548,7 +548,7 @@ def main():
     parser.add_argument("--video_size", type=str, default='hd',
                        help="Video size: 'training' (512x320) or 'hd' (1280x704)")
     parser.add_argument("--disable_dynamic_weight", action="store_true",
-                       help="Disable V7 dynamic text weight scheduling")
+                       help="Disable  dynamic text weight scheduling")
     parser.add_argument("--text_weight_max", type=float, default=1.5,
                        help="Maximum text weight in early phase")
     parser.add_argument("--text_weight_min", type=float, default=1.0,
@@ -573,11 +573,11 @@ def main():
     args = parser.parse_args()
     
     print("\n" + "="*80)
-    print("🎬 HIGH-QUALITY VIDEO GENERATION V7")
+    print("🎬 HIGH-QUALITY VIDEO GENERATION ")
     print("🚀 BAGEL + Wan2.2 Cross Attention Fusion")
     if args.use_lora:
         print(f"🎯 LoRA Enhanced: {args.lora_path}")
-    print("✨ V7 Feature: Dynamic Text Weight Scheduling")
+    print("✨  Feature: Dynamic Text Weight Scheduling")
     print("="*80 + "\n")
 
     if args.video_length is not None:
@@ -614,7 +614,7 @@ def main():
     )
 
     if config.use_dynamic_text_weight:
-        print("📈 V7 Dynamic Text Weight Configuration:")
+        print("📈  Dynamic Text Weight Configuration:")
         print(f"   • Schedule: {config.text_weight_schedule}")
         print(f"   • Weight Range: {config.text_weight_max} → {config.text_weight_min}")
         print(f"   • Transition: {config.text_weight_transition_ratio * 100}% of steps")
