@@ -67,7 +67,7 @@ class VideoGenerationConfig:
   )
 
     use_dynamic_text_weight: bool = True      
-    text_weight_max: float = 1.5
+    text_weight_max: float = 1.3
     text_weight_min: float = 1.0
     text_weight_schedule: str = "cosine"
     text_weight_transition_ratio: float = 0.4
@@ -431,7 +431,7 @@ class HighQualityVideoGenerator:
             
             video_numpy = video_tensor.cpu().numpy()
 
-            if video_numpy.min() >= -1.5 and video_numpy.max() <= 1.5:
+            if video_numpy.min() >= -1.3 and video_numpy.max() <= 1.3:
                 video_numpy = (video_numpy + 1) / 2  # [-1, 1] -> [0, 1]
                 video_numpy = np.clip(video_numpy * 255, 0, 255).astype(np.uint8)
             elif video_numpy.max() <= 1.0:
@@ -549,7 +549,7 @@ def main():
                        help="Video size: 'training' (512x320) or 'hd' (1280x704)")
     parser.add_argument("--disable_dynamic_weight", action="store_true",
                        help="Disable  dynamic text weight scheduling")
-    parser.add_argument("--text_weight_max", type=float, default=1.5,
+    parser.add_argument("--text_weight_max", type=float, default=1.3,
                        help="Maximum text weight in early phase")
     parser.add_argument("--text_weight_min", type=float, default=1.0,
                        help="Minimum text weight in late phase")
