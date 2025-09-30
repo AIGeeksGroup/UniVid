@@ -35,7 +35,7 @@ If you find our code or paper helpful, please consider starring ⭐ us and citin
 - ⬜️ Upload the code.
 
 ## 🏃 Intro UniVid
-UniVid is an open-source model that enhances the video generation and understanding.
+UniVid is an open-source model that enhances both video generation and video understanding.
 
 Unified video modeling combining generation and understanding capabilities is increasingly important, yet faces two key challenges: maintaining semantic faithfulness during flow-based generation due to text-visual token imbalance and the suboptimality of uniform cross-modal attention across the flow trajectory, and efficiently extending image-centric MLLMs to video without costly retraining. We present UniVid, a unified architecture that couples an MLLM with a diffusion decoder through a lightweight adapter, enabling both video understanding and generation. We introduce Temperature Modality Alignment to improve prompt adherence and Pyramid Reflection for efficient temporal reasoning via dynamic keyframe selection. Extensive experiments on standard benchmarks demonstrate the state-of-the-art performance of our unified video model, achieving a 2.2% improvement on VBench-Long total score compared to the previous SOTA method EasyAnimateV5.1, and 1.0% and 3.3% accuracy gains on MSVD-QA and ActivityNet-QA, respectively, compared with the best prior 7B baselines.
 
