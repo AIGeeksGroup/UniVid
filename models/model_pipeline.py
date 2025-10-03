@@ -1238,7 +1238,6 @@ class BagelSemanticExtractor(nn.Module):
             raise e
 
     def extract_semantic_tokens(self, text: str, images: Optional[Union[Image.Image, List[Image.Image], torch.Tensor]] = None) -> torch.Tensor:
-        """提取BAGEL语义tokens - 支持文本+图像联合编码"""
         self._force_device_sync()
         torch.cuda.set_device(self.device_id)
 
@@ -1505,7 +1504,6 @@ class BagelSemanticExtractor(nn.Module):
         return semantic_tokens
 
 class ContextProjector(nn.Module):
-    """Context投影器 - BAGEL tokens → Wan2.2 context format"""
 
     def __init__(self, config: CrossAttentionConfig):
         super().__init__()
@@ -3171,9 +3169,8 @@ class CrossAttentionFusionPipeline(nn.Module):
                 pass
 
     def get_fusion_info(self) -> Dict[str, Any]:
-        """获取融合信息"""
         return {
-            'architecture': 'Cross Attention Fusion: BAGEL → Wan2.2',
+            'architecture': 'Cross Attention Fusion: BAGEL → Wan22',
             'fusion_method': 'Direct context replacement',
             'fusion_point': 'text_encoder.__call__ method replacement',
             'fixes_applied': [
@@ -3227,7 +3224,6 @@ class CrossAttentionFusionPipeline(nn.Module):
             self.logger.warning(f"⚠️ Cleanup warning: {e}")
 
     def __del__(self):
-        """析构函数"""
         try:
             self.cleanup_resources()
         except:
