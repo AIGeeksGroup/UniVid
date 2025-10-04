@@ -10,7 +10,7 @@ __all__ = [
     'Wan2_1_VAE',
     'Wan2_2_VAE',
     'WanModel',
-    'T5Model',
+    'T5Model', 
     'T5Encoder',
     'T5Decoder',
     'T5EncoderModel',
