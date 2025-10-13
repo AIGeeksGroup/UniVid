@@ -48,3 +48,35 @@ Unified video modeling combining generation and understanding capabilities is in
 conda env create -f environment.yaml
 conda activate univid
 ```
+### 2. Understanding
+Runs the Reflection pipeline on a subset of videos and saves results + traces.
+#### Input format：
+- video_dir: contains files like video{video_id}.mp4
+- gt_file: JSON list with at least video_id, question, answer (optional id)
+```json
+[{"video_id": 1203, "question": "What color is the car?", "answer": "Red"}]
+```
+#### Quick Start
+```bash
+python eval_understanding.py \
+  --video_dir /path/to/videos \
+  --gt_file /path/to/gt.json \
+  --output_dir /path/to/out \
+  --output_name subset_run \
+  --model_path /path/to/MODEL_DIR \
+  --no_ddp_ranker \
+  --siglip_ckpt google/siglip2-base-patch16-naflex
+```
+#### Outputs
+
+- Batch summary: /path/to/out/subset_run.json(fields: id, video_id, question, answer, pred, trace_path)
+- Per-sample trace JSONs: /path/to/out/video{video_id}_reflexion.json
+- Keyframes (if enabled): sample_frames/video{video_id}/...
+
+#### Note：
+If all three rounds fail:
+
+- Static: fallback uses global-caption answer; if insufficient, use the last round.
+- Dynamic: fallback uses global-caption answer; if insufficient, use the first round.
+
+For DDP frame ranking, omit --no_ddp_ranker and add --ddp_ranker clip_rank_video_ddp.py --nproc 4.
