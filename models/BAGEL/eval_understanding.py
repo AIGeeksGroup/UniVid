@@ -37,8 +37,8 @@ def parse_args():
     p.add_argument("--id_from", type=int, required=True, help="Inclusive lower bound of video_id")
     p.add_argument("--id_to", type=int, required=True, help="Inclusive upper bound of video_id")
 
-    p.add_argument("--bagel_model_path", required=True,
-                   help="BAGEL model dir with llm_config.json / vit_config.json / ema.safetensors / ae.safetensors")
+    p.add_argument("--model_path", required=True,
+                   help="model dir with llm_config.json / vit_config.json / ema.safetensors / ae.safetensors")
     p.add_argument("--siglip_ckpt", default="google/siglip2-base-patch16-naflex")
     p.add_argument("--device", default="cuda:0", help="Device for SigLIP2 when using single-GPU ranking")
     p.add_argument("--no_ddp_ranker", action="store_true", help="Use built-in single-GPU SigLIP2 ranking")
@@ -750,7 +750,7 @@ def main():
     if len(subset) == 0:
         return
 
-    bagel = load_bagel_and_inferencer(args.bagel_model_path, args.max_mem_per_gpu, args.offload_folder)
+    bagel = load_bagel_and_inferencer(args.model_path, args.max_mem_per_gpu, args.offload_folder)
     ds, qwen = _make_reflection_clients(args.deepseek_api_key)
 
     os.makedirs(args.output_dir, exist_ok=True)
